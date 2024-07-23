@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 import pickle
 import xgboost as xgb
 from io import BytesIO
@@ -46,7 +47,7 @@ if data_file:
 
     if model:
         # Ensure dataset contains only numeric data for prediction
-        numeric_dataset = dataset.select_dtypes(include=[pd.np.number])
+        numeric_dataset = dataset.select_dtypes(include=[np.number])
 
         # Make predictions
         predicted_dataset = predict(model, numeric_dataset)
