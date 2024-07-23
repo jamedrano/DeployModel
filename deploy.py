@@ -20,6 +20,18 @@ def load_data(uploaded_file,sh,h):
 def pegar(df1, df2):
  return pd.concat([df1, df2.set_index(df1.index)], axis=1)
 
+def to_excel(df):
+ output = BytesIO()
+ writer = pd.ExcelWriter(output, engine='xlsxwriter')
+ df.to_excel(writer, index=False, sheet_name='Sheet1')
+ workbook = writer.book
+ worksheet = writer.sheets['Sheet1']
+ format1 = workbook.add_format({'num_format': '0.00'}) 
+ worksheet.set_column('A:A', None, format1)  
+ writer.close()
+ processed_data = output.getvalue()
+ return processed_data
+
 archivoModelo = st.file_uploader("Cargar Modelo")
    
 
