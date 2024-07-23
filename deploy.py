@@ -16,7 +16,8 @@ def load_model(file):
 # Function to predict and add predictions to the dataset
 def predict(model, dataset):
     try:
-        predictions = model.predict(xgb.DMatrix(dataset))
+        dmatrix = xgb.DMatrix(dataset)
+        predictions = model.predict(dmatrix)
         dataset['Predictions'] = predictions
         return dataset
     except Exception as e:
@@ -33,10 +34,10 @@ if model_file:
     model = load_model(model_file)
 
 # Upload dataset
-st.subheader("Upload a dataset")
-data_file = st.file_uploader("Choose a CSV file", type="csv")
+st.subheader("Upload a dataset (Excel file)")
+data_file = st.file_uploader("Choose an Excel file", type="xlsx")
 if data_file:
-    dataset = pd.read_csv(data_file)
+    dataset = pd.read_excel(data_file)
 
     # Show dataset
     st.write("Dataset Preview:")
