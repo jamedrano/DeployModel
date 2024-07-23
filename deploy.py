@@ -7,8 +7,7 @@ from io import BytesIO
 # Function to load the pickled model
 def load_model(file):
     try:
-        with open(file, 'rb') as f:
-            model = pickle.load(f)
+        model = pickle.load(f)
         return model
     except Exception as e:
         st.error(f"Error loading the model: {e}")
