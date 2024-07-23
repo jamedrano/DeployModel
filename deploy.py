@@ -32,23 +32,51 @@ def to_excel(df):
  processed_data = output.getvalue()
  return processed_data
 
-# archivoModelo = st.file_uploader("Cargar Modelo")
+# archivoModelo = st.file_uploader("Cargar Modelos en el orden 1D, 3D, 7D y 28D")
 model_files = [st.file_uploader(f"Choose model file {i+1}", type="pkl") for i in range(4)]   
 
 if len(model_files) is not 0:
-   modeloprod = load_model(model_files[0])
+   modeloprod1D = load_model(model_files[0])
+   modeloprod3D = load_model(model_files[1])
+   modeloprod7D = load_model(model_files[2])
+   modeloprod28D = load_model(model_files[3])
+ 
    st.write("Model loaded")
-   st.write(modeloprod)
+   # st.write(modeloprod)
     
    datosprod = st.file_uploader("Cargar Datos Prod")
    if datosprod is not None:     
-      datospred = load_data(datosprod, 'Sheet1', 0) 
+      datospred1 = load_data(datosprod, 'Sheet1', 0) 
      
-      st.write("Predicting...")  
-      ypred = modeloprod.get_booster().predict(xgb.DMatrix(datospred))
-      ypred2 = pd.DataFrame({'ypred':ypred})
-      resultados = pegar(datospred, ypred2)
-      st.dataframe(resultados)
-      resulta2 = to_excel(resultados)
+      ## 1D 
+      ypred = modeloprod1D.get_booster().predict(xgb.DMatrix(datospred1))
+      ypred2 = pd.DataFrame({'R1D':ypred})
+      resultados1D = pegar(datospred1, ypred2)
+          
+      datospred3 = resultados1D.iloc[:, [0,1,2,3,4,5,6,7,9,8]]          
+
+      ## 3D 
+      ypred = modeloprod3D.get_booster().predict(xgb.DMatrix(datospred3))
+      ypred2 = pd.DataFrame({'R3D':ypred})
+      resultados3D = pegar(datospred3, ypred2)
+          
+      datospred7 = resultados3D.iloc[:, [0,1,2,3,4,5,6,7,8,10,9]]          
+
+      ## 7D 
+      ypred = modeloprod7D.get_booster().predict(xgb.DMatrix(datospred7))
+      ypred2 = pd.DataFrame({'R7D':ypred})
+      resultados7D = pegar(datospred7, ypred2)
+          
+      datospred28 = resultados7D.iloc[:, [0,1,2,3,4,5,6,7,8,9,11,10]]          
+
+      ## 28D 
+      ypred = modeloprod28D.get_booster().predict(xgb.DMatrix(datospred28))
+      ypred2 = pd.DataFrame({'R28D':ypred})
+      resultados28D = pegar(datospred28, ypred2)
+          
+     
+    
+      st.dataframe(resultados28D)
+      resulta2 = to_excel(resultados28D)
       st.download_button(label='📥Descargar resultados',data=resulta2 ,file_name= 'resultados.xlsx')
    
