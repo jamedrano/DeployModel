@@ -5,6 +5,11 @@ import pickle
 import xgboost as xgb
 from io import BytesIO
 
+def load_model(uploaded_file):
+ modelo = pd.read_pickle(uploaded_file)
+ return modelo
+
+
 archivoModelo = st.file_uploader("Cargar Modelo")
    
 
