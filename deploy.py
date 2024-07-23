@@ -17,6 +17,9 @@ def load_data(uploaded_file,sh,h):
    data[col] = data[col].str.strip()    
  return data
 
+def pegar(df1, df2):
+ return pd.concat([df1, df2.set_index(df1.index)], axis=1)
+
 archivoModelo = st.file_uploader("Cargar Modelo")
    
 
