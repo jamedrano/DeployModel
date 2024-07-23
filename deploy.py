@@ -35,7 +35,7 @@ def to_excel(df):
 # archivoModelo = st.file_uploader("Cargar Modelo")
 model_files = [st.file_uploader(f"Choose model file {i+1}", type="pkl") for i in range(4)]   
 
-if archivoModelo is not None:
+if len(model_files) is not 0:
    modeloprod = load_model(model_files[0])
    st.write("Model loaded")
    st.write(modeloprod)
