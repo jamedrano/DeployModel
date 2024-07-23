@@ -16,6 +16,7 @@ def load_model(file):
 # Function to predict and add predictions to the dataset
 def predict(model, dataset):
     try:
+        # Ensure the dataset is in the correct format
         dmatrix = xgb.DMatrix(dataset)
         predictions = model.predict(dmatrix)
         dataset['Predictions'] = predictions
@@ -38,24 +39,30 @@ st.subheader("Upload a dataset (Excel file)")
 data_file = st.file_uploader("Choose an Excel file", type="xlsx")
 if data_file:
     dataset = pd.read_excel(data_file)
-
+    
     # Show dataset
     st.write("Dataset Preview:")
     st.write(dataset.head())
 
     if model:
+        # Ensure dataset contains only numeric data for prediction
+        numeric_dataset = dataset.select_dtypes(include=[pd.np.number])
+
         # Make predictions
-        predicted_dataset = predict(model, dataset)
+        predicted_dataset = predict(model, numeric_dataset)
 
         if predicted_dataset is not None:
+            # Combine predictions with original data
+            combined_dataset = pd.concat([dataset, predicted_dataset['Predictions']], axis=1)
+
             # Show predictions
             st.write("Predictions:")
-            st.write(predicted_dataset.head())
+            st.write(combined_dataset.head())
 
             # Download predicted data
             output = BytesIO()
             with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
-                predicted_dataset.to_excel(writer, index=False, sheet_name='Sheet1')
+                combined_dataset.to_excel(writer, index=False, sheet_name='Sheet1')
             output.seek(0)
 
             st.download_button(
