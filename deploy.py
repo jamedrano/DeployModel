@@ -32,11 +32,11 @@ def to_excel(df):
  processed_data = output.getvalue()
  return processed_data
 
-archivoModelo = st.file_uploader("Cargar Modelo")
-   
+# archivoModelo = st.file_uploader("Cargar Modelo")
+model_files = [st.file_uploader(f"Choose model file {i+1}", type="pkl") for i in range(4)]   
 
 if archivoModelo is not None:
-   modeloprod = load_model(archivoModelo)
+   modeloprod = load_model(model_files[0])
    st.write("Model loaded")
    st.write(modeloprod)
     
