@@ -37,7 +37,7 @@ modelos = ["1D", "3D", "7D", "28D"]
 st.sidebar.write("Cargar Modelos en el orden 1D, 3D, 7D y 28D")
 model_files = [st.sidebar.file_uploader(f"Cargar el modelo {i}", type="pkl") for i in modelos]   
 
-if len(model_files) is not 0:
+if model_files:
    modeloprod1D = load_model(model_files[0])
    modeloprod3D = load_model(model_files[1])
    modeloprod7D = load_model(model_files[2])
