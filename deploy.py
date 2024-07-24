@@ -89,6 +89,8 @@ if all(model_files):
                     ypred2 = pd.DataFrame({'R28D': ypred})
                     resultados28D = pegar(datospred28, ypred2)
 
+                    resultados28D = resultados28D.iloc[:, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12,11]]
+
                     st.dataframe(resultados28D)
                     resulta2 = to_excel(resultados28D)
                     st.download_button(label='📥 Descargar resultados', data=resulta2, file_name='resultados.xlsx')
