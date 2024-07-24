@@ -45,7 +45,7 @@ st.title("Predictor de Resistencia a la Tensión")
 
 # Upload models
 st.sidebar.header("Cargar los modelos previamente entrenados")
-st.sidebar.subheader("Cargar Modelos en el orden 1D, 3D, 7D y 28D")
+st.sidebar.info("Cargar Modelos en el orden 1D, 3D, 7D y 28D")
 model_files = [st.sidebar.file_uploader(f"Cargar el modelo {i}", type="pkl") for i in ["1D", "3D", "7D", "28D"]]
 
 # Check if all model files are uploaded
