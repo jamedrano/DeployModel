@@ -35,7 +35,7 @@ def to_excel(df):
 # archivoModelo = st.file_uploader("Cargar Modelos en el orden 1D, 3D, 7D y 28D")
 modelos = ["1D", "3D", "7D", "28D"]
 st.sidebar.write("Cargar Modelos en el orden 1D, 3D, 7D y 28D")
-model_files = [st.sidebar.file_uploader(f"Cargar el modelo {i}", type="pkl") for i in modelos)]   
+model_files = [st.sidebar.file_uploader(f"Cargar el modelo {i}", type="pkl") for i in modelos]   
 
 if len(model_files) is not 0:
    modeloprod1D = load_model(model_files[0])
