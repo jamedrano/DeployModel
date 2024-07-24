@@ -97,6 +97,6 @@ if all(model_files):
                 except Exception as e:
                     st.error(f"Error processing the data: {e}")
     else:
-        st.error("Error loading one or more models")
+        st.error("Error cargando modelo")
 else:
-    st.info("Please upload all four models.")
+    st.info("Por favor, es necesario cargar primero los 4 modelos en la parte izquierda.")
