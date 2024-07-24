@@ -44,8 +44,8 @@ def to_excel(df):
 st.title("Multiple Model Predictor")
 
 # Upload models
-st.subheader("Cargar Modelos en el orden 1D, 3D, 7D y 28D")
-model_files = [st.file_uploader(f"Cargar el modelo {i}", type="pkl") for i in ["1D", "3D", "7D", "28D"]]
+st.sidebar.subheader("Cargar Modelos en el orden 1D, 3D, 7D y 28D")
+model_files = [st.sidebar.file_uploader(f"Cargar el modelo {i}", type="pkl") for i in ["1D", "3D", "7D", "28D"]]
 
 # Check if all model files are uploaded
 if all(model_files):
