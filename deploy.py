@@ -60,7 +60,7 @@ if all(model_files):
         st.subheader("Cargar los datos para la predicción")
         datosprod = st.file_uploader("Cargar Datos Prod", type="xlsx")
         if datosprod is not None:
-            datospred1 = load_data(datosprod, 'Sheet1', 0)
+            datospred1 = load_data(datosprod, 'DATOS 2', 0)
             if datospred1 is not None:
                 try:
                     # 1D
