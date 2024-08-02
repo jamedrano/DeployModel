@@ -35,7 +35,7 @@ def pegar(df1, df2):
 def to_excel(df):
     output = BytesIO()
     writer = pd.ExcelWriter(output, engine='xlsxwriter')
-    df.to_excel(writer, index=False, sheet_name='Sheet1')
+    df.to_excel(writer, index=False, sheet_name='DATOS 2')
     writer.close()
     processed_data = output.getvalue()
     return processed_data
